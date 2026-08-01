@@ -3,14 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Slash Studios | Indie Game Development</title>
+    <style>
+        /* =========================================
+           YOUR PROVIDED CSS (Slash Studios - Dark Orange Theme)
+           ========================================= */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            /* Colors */
+            --vs-bg: #111111;           /* Main background */
+            --vs-surface: #1e1e1e;      /* Card/Nav background */
+            --vs-border: #2d2d2d;       /* Subtle structural borders */
+            --vs-accent: #ff7946;       /* The signature orange */
+            --vs-accent-hover: #ff5c1c; /* Darker orange for hover states */
+            --vs-text: #d4d4d4;         /* Standard paragraph text */
+            --vs-muted: #858585;        /* Muted/comment text */
+            --vs-white: #ffffff;
+
+            /* Fonts */
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--vs-bg);
+            color: var(--vs-text);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ::selection {
+            background-color: var(--vs-accent);
+            color: var(--vs-bg);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--vs-white);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--vs-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--vs-border);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--vs-accent);
+        }
+
+        .font-mono { font-family: var(--font-mono); }
+        .glow-text {
+            color: var(--vs-accent);
+            text-shadow: 0 0 15px rgba(255, 121, 70, 0.4);
+        }
+        .text-accent { color: var(--vs-accent); }
+        .text-muted { color: var(--vs-muted); }
+
+        .accent-border-hover {
+            background-color: var(--vs-bg);
+            border: 1px solid var(--vs-border);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .accent-border-hover:hover {
+            border-color: var(--vs-accent);
+            box-shadow: 0 0 20px rgba(255, 121, 70, 0.15);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--vs-accent);
+            color: var(--vs-bg);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 2px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--vs-accent-hover);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: transparent;
+            color: var(--vs-accent);
+            border: 1px solid var(--vs-accent);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 121, 70, 0.1);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--vs-accent);
+            color: var(--vs-bg);
+            box-shadow: 0 0 15px rgba(255, 121, 70, 0.4);
+        }
+
+        /* =========================================
+           LAYOUT & STRUCTURAL CSS (Added for the site)
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--vs-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.25rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a:hover {
+            color: var(--vs-accent);
+        }
+
+        /* Sections */
+        .section {
+            padding: 8rem 0;
+        }
+
+        .bg-surface {
+            background-color: var(--vs-surface);
+            border-top: 1px solid var(--vs-border);
+            border-bottom: 1px solid var(--vs-border);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--vs-accent);
+            box-shadow: 0 0 10px rgba(255, 121, 70, 0.4);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 121, 70, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin: 1rem 0 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Grid / Cards */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .game-card {
+            border-radius: 4px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .game-img-placeholder {
+            background: #0a0a0a;
+            height: 220px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--vs-border);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            border: 1px dashed var(--vs-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-img-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.02), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover .game-img-placeholder::after {
+            left: 200%;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info p {
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card-link:hover {
+            text-shadow: 0 0 8px rgba(255, 121, 70, 0.5);
+        }
+
+        /* Terminal Style About Section */
+        .terminal-window {
+            background: var(--vs-bg);
+            border: 1px solid var(--vs-border);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .terminal-header {
+            background: var(--vs-surface);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--vs-border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--vs-muted);
+        }
+        .terminal-dot:nth-child(1) { background: #ff5f56; } /* Close */
+        .terminal-dot:nth-child(2) { background: #ffbd2e; } /* Min */
+        .terminal-dot:nth-child(3) { background: #27c93f; } /* Max */
+
+        .terminal-body {
+            padding: 2.5rem;
+            font-family: var(--font-mono);
+            color: var(--vs-text);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .terminal-prompt {
+            color: #27c93f;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--vs-surface);
+            padding: 3rem 0;
+            border-top: 1px solid var(--vs-border);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-actions { flex-direction: column; }
+            .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <a></a>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo font-mono"><span style="color: var(--vs-white)">/</span><span class="text-accent">Slash</span><span style="color: var(--vs-white)">Studios</span></a>
+            <ul class="nav-links font-mono">
+                <li><a href="#games">./Games</a></li>
+                <li><a href="#about">./Manifesto</a></li>
+                <li><a href="#contact">./Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">We code <br><span class="glow-text">digital realities</span></h1>
+            <p class="hero-subtitle text-muted">
+                slash studios is an indie game studio inspired by absolute classics.
+            </p>
+            <div class="hero-actions">
+                <a href="#games" class="btn-primary">Games</a>
+                <a href="#contact" class="btn-outline font-mono">Our GitHub</a>
+            </div>
+        </div>
     </header>
-    <button class="btn-primary">Games</button>
-    <button class="btn-outline"></button>
+
+    <!-- About/Manifesto Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Studio.Config</h2>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                </div>
+                <div class="terminal-body">
+                    <p><span class="terminal-prompt">guest@slash-studios:~$</span> cat manifesto.txt</p>
+                    <p class="text-accent" style="margin: 1rem 0;">Loading...</p>
+                    <p>
+                        /*<br>
+                        &nbsp;* We believe games should be challenges, not chores.<br>
+                        &nbsp;* We write custom engines when the off-the-shelf stuff doesn't cut it.<br>
+                        &nbsp;* We prefer pixel-perfect hitboxes over cinematic cutscenes.<br>
+                        &nbsp;*/
+                    </p>
+                    <br>
+                    <p>
+                        const team = ["Programmers", "Artists", "Audio_Engineers"];<br>
+                        const mission = "Pushing hardware to its limits since 2024.";<br>
+                        <br>
+                        if (passion > budget) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log("Welcome to Slash Studios.");<br>
+                        }
+                    </p>
+                    <br>
+                    <p><span class="terminal-prompt">guest@slash-studios:~$</span> <span class="blink">_</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container footer-content">
+            <div class="logo font-mono text-muted">
+                <span style="color: var(--vs-white)">/</span><span class="text-accent">Slash</span><span style="color: var(--vs-white)">Studios</span>
+            </div>
+            <p class="text-muted text-sm font-mono">
+                © 2024 Slash Studios. All rights reserved. <br>
+                <span class="text-accent">status: online</span>
+            </p>
+            <div class="social-links font-mono text-sm">
+                <a href="#" class="text-muted hover:text-accent" style="margin-right: 1rem;">[ GitHub ]</a>
+                <a href="#" class="text-muted hover:text-accent" style="margin-right: 1rem;">[ Discord ]</a>
+                <a href="#" class="text-muted hover:text-accent">[ Steam ]</a>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* A little extra animation for the terminal */
+        .blink {
+            animation: blinker 1s linear infinite;
+            background: var(--vs-text);
+            color: var(--vs-text);
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        .hover\:text-accent:hover {
+            color: var(--vs-accent) !important;
+        }
+    </style>
 </body>
 </html>
