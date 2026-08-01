@@ -1,0 +1,167 @@
+/* * Slash Studios - Dark Orange Theme
+ * Custom Stylesheet
+ */
+
+/* =========================================
+   1. Typography Imports
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap');
+
+/* =========================================
+   2. Theme Variables (VSCode Orange)
+   ========================================= */
+:root {
+    /* Colors */
+    --vs-bg: #111111;           /* Main background */
+    --vs-surface: #1e1e1e;      /* Card/Nav background */
+    --vs-border: #2d2d2d;       /* Subtle structural borders */
+    --vs-accent: #ff7946;       /* The signature orange */
+    --vs-accent-hover: #ff5c1c; /* Darker orange for hover states */
+    --vs-text: #d4d4d4;         /* Standard paragraph text */
+    --vs-muted: #858585;        /* Muted/comment text */
+    --vs-white: #ffffff;
+
+    /* Fonts */
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+}
+
+/* =========================================
+   3. Base Styles & Resets
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--vs-bg);
+    color: var(--vs-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Highlighting text matches the theme */
+::selection {
+    background-color: var(--vs-accent);
+    color: var(--vs-bg);
+}
+
+/* Typography Base Classes */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--vs-white);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+/* =========================================
+   4. Custom Scrollbar (Dark Theme)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vs-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vs-border);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vs-accent);
+}
+
+/* =========================================
+   5. Custom Theme Utilities & Effects
+   ========================================= */
+   
+/* Use this for the monospace/code sections */
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+/* The neon orange text glow */
+.glow-text {
+    color: var(--vs-accent);
+    text-shadow: 0 0 15px rgba(255, 121, 70, 0.4);
+}
+
+/* Accent text color helper */
+.text-accent {
+    color: var(--vs-accent);
+}
+
+.text-muted {
+    color: var(--vs-muted);
+}
+
+/* Game Card hover effect */
+.accent-border-hover {
+    background-color: var(--vs-bg);
+    border: 1px solid var(--vs-border);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.accent-border-hover:hover {
+    border-color: var(--vs-accent);
+    box-shadow: 0 0 20px rgba(255, 121, 70, 0.15);
+}
+
+/* Primary Button Style */
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--vs-accent);
+    color: var(--vs-bg);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--vs-accent-hover);
+}
+
+/* Outline/Ghost Button Style */
+.btn-outline {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--vs-accent);
+    border: 1px solid var(--vs-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 121, 70, 0.1);
+}
+
+.btn-outline:hover {
+    background-color: var(--vs-accent);
+    color: var(--vs-bg);
+    box-shadow: 0 0 15px rgba(255, 121, 70, 0.4);
+}
